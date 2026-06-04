@@ -1,0 +1,58 @@
+name: Daily Job Search
+
+on:
+  schedule:
+    # Runs every day at 8:00 AM Malaysia time
+    # GitHub uses UTC, so 00:00 UTC = 8:00 AM Malaysia
+    - cron: "0 0 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  search-jobs:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run scraper
+        run: |
+          python src/scrape_jobs.py
+
+      - name: Rank jobs
+        run: |
+          python src/rank_jobs.py
+
+      - name: Send Telegram notification
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python src/notify_telegram.py
+
+      - name: Upload job results as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-job-results
+          path: data/
+
+      - name: Commit latest results
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add data/
+          git commit -m "Update daily job results" || echo "No changes to commit"
+          git push
