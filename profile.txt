@@ -1,0 +1,37 @@
+I am a software developer based in Malaysia.
+
+Main skills:
+- C#
+- .NET Framework
+- .NET Core
+- ASP.NET MVC
+- Angular
+- SQL Server
+- Azure DevOps
+- CI/CD
+- Legacy system modernization
+- Dashboard development
+- Production support
+- AI tools and automation
+
+Preferred roles:
+- .NET Developer
+- C# Developer
+- Angular Developer
+- Full Stack Developer
+- Software Engineer
+- AI Engineer
+
+Preferred location:
+- Kuala Lumpur
+- Selangor
+- Remote Malaysia
+
+Preferred salary:
+- RM 7000 and above
+
+Avoid:
+- Internship
+- Junior-only roles
+- Pure sales roles
+- Jobs requiring fake experience
