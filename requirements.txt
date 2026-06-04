@@ -3,4 +3,4 @@ openpyxl
 python-dotenv
 requests
 beautifulsoup4
-playwright
+openai
