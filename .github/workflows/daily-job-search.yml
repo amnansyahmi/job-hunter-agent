@@ -32,9 +32,13 @@ jobs:
         run: |
           python src/scrape_jobs.py
 
-      - name: Rank jobs
+      - name: Rank jobs with AI
+        env:
+          AI_BASE_URL: ${{ secrets.AI_BASE_URL }}
+          AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_MODEL: ${{ secrets.AI_MODEL }}
         run: |
-          python src/rank_jobs.py
+          python src/ai_rank_jobs.py
 
       - name: Send Telegram notification
         env:
